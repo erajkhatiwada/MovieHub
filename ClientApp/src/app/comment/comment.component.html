@@ -1,0 +1,84 @@
+<div class="wrapper">
+  <div class="page-header section-dark" style="background-image: url('assets/img/theme.jpg')">
+    <div class="filter"></div>
+    <div class="content-center">
+      <div class="container">
+        <div class="title-brand">
+          <!-- <h1 class="presentation-title">Movie Hub</h1> -->
+          <div class="fog-low">
+            <img src="assets/img/fog-low.png" alt="">
+          </div>
+          <div class="fog-low right">
+            <img src="assets/img/fog-low.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="moving-clouds" style="background-image: url('assets/img/clouds.png'); ">
+    </div>
+  </div>
+</div>
+
+<div *ngIf="popularJson">
+  <div class="container" *ngFor="let something of popularJson">
+    <div class="row profile">
+      <div class="col-md-3">
+        <div class="profile-sidebar">
+          <img class="card-img-top float-left" src="{{something.imageUrl}}" alt="Card image cap">
+          <br>
+        </div>
+      </div>
+      <div class="col-md-9 float-center">
+        <div class="profile-content float-center">
+          <div class=" float-center">
+            <div class="card-body" >
+              <h5 class="card-title"><strong> {{something.name}}</strong></h5>
+              <ul class="list-group list-group-flush">
+                  <a href = "{{something.firstLink}}" target="_blank"><li class="list-group-item" ><strong>{{something.firstSource}} :</strong> {{something.firstPrice}}</li></a>
+                  <a href = "{{something.secondLink}}" target="_blank"><li class="list-group-item" ><strong>{{something.secondSource}} :</strong> {{something.secondPrice}}</li></a>
+              </ul>
+            </div>
+            <h5 class="card-title card-body"><strong> Comments <i class="nc-icon nc-chat-33"></i> : </strong></h5>
+        <!--Comment Section-->
+            <ul class="list-group list-group-flush" *ngFor="let comments of commentsArray">
+                
+                <li class="list-group-item"><strong class="text-primary">{{comments.username}}:</strong> <strong> {{comments.comment}}</strong> <i class="nc-icon nc-simple-remove pull-right" *ngIf="comments.button" data-toggle="modal" data-target="#myModal" (click)="deleteComment(comments)"></i></li>
+            </ul>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1"><strong>Comment Here</strong></label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #box (keyup)="onEnter(box.value)"></textarea>
+                <button type="button" class="btn btn-outline-success" (click)="comment()" *ngIf="userId">Comment <i class="nc-icon nc-send"></i></button>
+                <button type="button" class="btn " (click)="loginPage()" *ngIf="!userId">Login to Comment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLabel">Confirm delete</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body"> Are you sure you want to delete this comment?
+          </div>
+          <div class="modal-footer">
+            <div class="left-side">
+              <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Never mind</button>
+            </div>
+            <div class="divider"></div>
+            <div class="right-side">
+              <button type="button" class="btn btn-default btn-link" (click)="confirmDelete()" data-dismiss="modal">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

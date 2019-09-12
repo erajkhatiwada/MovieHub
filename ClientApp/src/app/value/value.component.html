@@ -1,0 +1,128 @@
+<!-- <input #box (keyup)="onEnter(box.value)"> -->
+<!-- <p>Please select one option:</p> -->
+<form class="form-inline my-2 my-lg-0 justify-content-center ">
+  <select class="form-control col-md-3" id="inlineFormCustomSelect" [(ngModel)]="selectedOption" name="first" (click)="print()">
+    <option *ngFor="let o of options" [ngValue]="o">
+      {{o}}
+    </option>
+  </select>
+</form>
+<br>
+
+<form class="form-inline my-2 my-lg-0 justify-content-center has-success">
+  <input class="form-control col-md-3 mb-3" type="search" placeholder="Search" aria-label="Search" #box (keyup)="onEnter(box.value)">
+</form>
+
+<div *ngIf="value">
+  <h5>Showing best result for: <strong>{{value}} </strong> </h5>
+</div>
+
+<div *ngIf="check1">
+  <div class="container">
+    <div class="row  ">
+      <div class="col " *ngFor="let movieResults of movie_list" (click)="passData(movieResults)">
+        <div class="card-group cardHeight">
+          <div class="card">
+            <img class="card-img-top " src="https://image.tmdb.org/t/p/w500/{{movieResults.poster_path}}" alt="Card image cap">
+            <div class="card-body  cardHeight">
+              <p class="card-text"><small class="text-muted">{{movieResults.title}}</small> </p>
+              <!--<p class="card-text">Name: {{movieResults.original_language}}</p>
+                <p class="card-text">Price: ${{movieResults.popularity}}</p>
+                <p class="card-text"><small class="text-muted">Release Date: {{movieResults.release_date}}</small></p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Trailer Section-->
+<div class="container" *ngIf="check3">
+  <ul class="list-unstyled video-list-thumbs row">
+    <li class="col-lg-3 col-sm-4 col-xs-6" *ngFor="let video of trailers">
+      <a href="#" title="Click to view" >
+        <video controls preload="auto" poster="" alt="Barca" class="img-responsive">
+          <source src="{{video.previewUrl}}#t=5" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+        <h2>{{video.trackName}}</h2>
+        <span class="glyphicon glyphicon-play-circle"></span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="check2">
+  <div class="container">
+    <div class="row">
+      <div class="col " *ngFor="let movieResults of walmartMovies" (click)="passWalmartData(movieResults)">
+        <div class="card-group cardHeight">
+          <div class="card">
+            <img class="card-img-top " src="{{movieResults.largeImage}}" alt="Card image cap">
+            <div class="card-body  cardHeight">
+              <p class="card-text">Price: ${{movieResults.salePrice}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="check4">
+  <div class="container">
+    <div class="row">
+      <div class="col " *ngFor="let movieResults of itunesMovies" (click)="passItunesData(movieResults)">
+        <div class="card-group cardHeight">
+          <div class="card">
+            <img class="card-img-top " src="{{movieResults.artworkUrl100}}" alt="Card image cap">
+            <div class="card-body  cardHeight">
+              <p class="card-text" *ngIf="movieResults.trackRentalPrice">Rental Price: <strong>${{movieResults.trackRentalPrice}}</strong></p>
+              <p class="card-text" *ngIf="movieResults.trackPrice">Price:<strong>${{movieResults.trackPrice}}</strong>
+              </p>
+              <p class="card-text"><small class="text-muted">Itunes</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12" style="height:20px;"></div>
+
+<div *ngIf="movie_database">
+  <h3> Featured Movies </h3>
+  <div class="container">
+    <div class="row">
+      <div class="col" *ngFor="let database_movie of movie_database" (click)="setMovieId(database_movie)">
+        <div class="card-group cardHeight2">
+          <div class="card">
+            <img class="card-img-top" src="{{database_movie.imageUrl}}" alt="Card image cap">
+            <div class="card-body">
+              <a href="{{database_movie.firstLink}}" target="_blank">
+                <p class="card-text qr ">{{database_movie.firstSource}} : {{database_movie.firstPrice}} </p>
+              </a>
+              <br>
+              <a href="{{database_movie.secondLink}}" target="_blank">
+                <p class="card-text qr">{{database_movie.secondSource}} : {{database_movie.secondPrice}} </p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="listPopularMoives">
+  <h3> Popular Movies </h3>
+  <div class="container">
+    <div class="row">
+      <div class="col" *ngFor="let movieItem of listPopularMoives" (click)="passData(movieItem)">
+        <movie-item [data]='movieItem'></movie-item>
+      </div>
+    </div>
+  </div>

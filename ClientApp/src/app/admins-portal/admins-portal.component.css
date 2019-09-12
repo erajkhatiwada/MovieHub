@@ -1,0 +1,35 @@
+.page-header {
+  background-color: #B2AFAB;
+  background-position: center center;
+  background-size: cover;
+  min-height: 200px;
+  max-height: 999px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr {
+  background-color: #3d3734;
+  color: #fff;
+  margin: auto;
+  max-width: 500px;
+  height: 100%;
+  padding: 3px;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px rgba(75, 75, 75, 0.3);
+  min-height: 400px;
+  padding: 30px;
+  z-index: 1;
+}
+.btn{
+  margin-top: 20px;
+}
+.profile-content{
+  margin-top: 60px;
+}
+

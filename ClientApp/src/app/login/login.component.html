@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" color="#fff" type="ball-scale-ripple-multiple"></ngx-spinner>
+  <div class="page-header section-dark" style="background-image: url('assets/img/theme.jpg')">
+    <div class="filter"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 ml-auto mr-auto">
+          <div class="card card-register">
+            <h3 class="title">Login</h3>
+            <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username or password.</div>
+            <form #loginForm="ngForm" class="register-form" (ngSubmit)="login()">
+              <label>Username</label>
+              <input type="text" class="form-control" name="username" placeholder="username" required [(ngModel)]="model.username">
+              <label>Password</label>
+              <input type="password" class="form-control" name="password" placeholder="Password" required [(ngModel)]="model.password">
+              <button [disabled]="!loginForm.valid" class="btn btn-dark btn-block btn-round">Login</button>
+            </form>
+            <div class="forgot">
+              <a routerLink="/signup" class="btn btn-link btn-danger">Don't have an account?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer register-footer text-center">
+        <span class="copyright">
+          © Movie Hub
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

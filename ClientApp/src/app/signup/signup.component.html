@@ -1,0 +1,48 @@
+<div class="wrapper">
+  <div class="page-header section-dark" style="background-image: url('assets/img/theme.jpg')">
+    <div class="filter"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 ml-auto mr-auto">
+          <div class="card card-register">
+            <h3 class="title">Sign Up</h3>
+            <div *ngIf="checkUsername" class="alert alert-danger">{{checkUsername}}</div>
+            <div *ngIf="message"class="alert alert-success">{{anotherMessage}}</div>
+            <form #loginForm="ngForm" class="register-form"  (ngSubmit)="register()">
+              <label>Username</label>
+              <input type="text" class="form-control" name="username" required placeholder="Username" [(ngModel)]="model.username" required>
+             
+              <label>First Name</label>
+              <input type="text" class="form-control" name="firstname" required placeholder="First Name" [(ngModel)]="model.firstname" required>
+
+              <label>Last Name</label>
+              <input type="text" class="form-control" name="lastname" required placeholder="Last Name"[(ngModel)]="model.lastname" required>
+
+              <label data-error="Required field!">Email</label>
+              <input type="text" class="form-control" name = "email" required placeholder="email" [(ngModel)]="model.email" [pattern]="emailPattern"  required>
+              
+              <label>Password</label>
+              <input type="password" class="form-control" name="password" required placeholder="Password" [(ngModel)]="model.password" required>
+
+              <label>Confirm Password</label>
+              <input type="password" class="form-control" name="confirmpassword" required placeholder="Confirm Password" ngModel #pwConfirm = "ngModel"  required compare="password">
+              <div class="alert alert-danger" *ngIf="pwConfirm.invalid && (pwConfirm.dirty||pwConfirm.touched)">
+              <div *ngIf="pwConfirm.errors['compare']">Password doesnot not match</div></div>
+              
+              <button class="btn btn-danger btn-block btn-round"  [disabled]="!loginForm.valid">Register</button>
+              <p class="has-success">{{message}}</p>
+            </form>
+            <div class="forgot">
+              <a routerLink="../login" class="btn btn-link btn-danger" > Already have an account?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer register-footer text-center">
+        <span class="copyright">
+          © Movie Hub
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

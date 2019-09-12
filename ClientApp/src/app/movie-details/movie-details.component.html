@@ -1,0 +1,158 @@
+<div class="wrapper">
+  <div class="page-header section-dark" style="background-image: url('assets/img/theme.jpg')">
+    <div class="filter"></div>
+    <div class="content-center">
+      <div class="container">
+        <div class="title-brand">
+          <!-- <h1 class="presentation-title">Movie Hub</h1> -->
+          <div class="fog-low">
+            <img src="assets/img/fog-low.png" alt="">
+          </div>
+          <div class="fog-low right">
+            <img src="assets/img/fog-low.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="moving-clouds" style="background-image: url('assets/img/clouds.png'); ">
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-success container" *ngIf="notification">
+   <div class="container">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <i class="nc-icon nc-simple-remove"></i>
+    </button>
+    <span>Successfully Added to Watchlist! </span>
+  </div> 
+  
+</div>
+
+<div class="alert alert-danger container" *ngIf="watchlistError">
+    <div class="container">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <i class="nc-icon nc-simple-remove"></i>
+        </button>
+        <span>{{watchlistError}}</span>
+      </div>
+  </div>
+
+<div class="container" *ngIf="original_title">
+  <div class="row profile">
+    <div class="col-md-3">
+      <div class="profile-sidebar">
+        <img class="card-img-top float-left" src="https://image.tmdb.org/t/p/w500/{{poster_path}}" alt="Card image cap">
+        <br>
+        <div class="profile-userbuttons">
+          <button type="button" class="btn btn-success btn-sm" (click)="postToWatchList()" *ngIf="showAddButton">Add to watchlist</button>
+          <a routerLink="/account"> <button type="button" class="btn btn-success btn-sm" *ngIf="!whenNotLogged">Add
+              to watchlist</button> </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 float-right">
+      <div class="profile-content float-right">
+        <div class=" float-right">
+          <div class="card-body" *ngIf="original_title">
+            <h5 class="card-title"><strong>{{original_title}}</strong></h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngIf="overview"><strong>Overview:</strong> {{overview}}</li>
+            <li class="list-group-item" *ngIf="vote_average"><strong>Average Vote:</strong> {{vote_average}}</li>
+            <li class="list-group-item" *ngIf="original_language"><strong>Original Language:</strong> {{original_language}}</li>
+            <li class="list-group-item" *ngIf="release_date"><strong>Release Date:</strong> {{release_date}}</li>
+            <li class="list-group-item" *ngIf="popularity"><strong>Popularity:</strong> {{popularity}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="salePrice">
+  <div class="row profile">
+    <div class="col-md-3">
+      <div class="profile-sidebar">
+        <a href="{{productUrl}}" target="_blank"><img class="card-img-top float-left" src="{{largeImage}}" alt="Card image cap"></a>
+        <br>
+        <div class="profile-userbuttons">
+          <button type="button" class="btn btn-success btn-sm" (click)="walmartWatchlist()" *ngIf="showAddButton">Add to watchlist</button>
+          <a routerLink="/account"> <button type="button" class="btn btn-success btn-sm" *ngIf="!whenNotLogged">Add
+              to watchlist</button> </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 float-right">
+      <div class="profile-content float-right">
+        <div class="float-right">
+          <div class="card-body">
+            <h5 class="card-title"><strong>{{name}}</strong></h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Overview:</strong> {{shortDescription}}</li>
+            <a href="{{productUrl}}" target="_blank">
+              <li class="list-group-item"><strong>Price:</strong> ${{salePrice}}</li>
+            </a>
+            <li class="list-group-item"><strong>Manufacturer's Suggested Retail Price:</strong> ${{msrp}}</li>
+            <li class="list-group-item"><strong>Rating:</strong> {{customerRating}}</li>
+            <li class="list-group-item"><strong>Offer Type:</strong> {{offerType}}</li>
+          </ul>
+          <div class="card-body">
+            <a href="{{productUrl}}" class="card-link" target="_blank">Go to store</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="country">
+  <div class="row profile">
+    <div class="col-md-3">
+      <div class="profile-sidebar">
+        <a href="{{trackViewUrl}}" target="_blank"><img class="card-img-top float-left" src="{{artworkUrl100}}" alt="Card image cap"></a>
+        <br>
+        <div class="profile-userbuttons">
+          <button type="button" class="btn btn-success btn-sm" (click)="itunesWatchlist()" *ngIf="showAddButton">Add to watchlist</button>
+          <a routerLink="/account"> <button type="button" class="btn btn-success btn-sm" *ngIf="!whenNotLogged">Add
+              to watchlist</button> </a>
+          <!-- <button type="button" class="btn btn-success btn-sm" (click)="toggle()">Click to Watch Trailer! </button> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 float-right">
+      <div class="profile-content float-right">
+        <div class="float-right">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Watch Trailer</strong></h5>
+            <div class="embed-responsive embed-responsive-4by3 videoSizer">
+              <!--<iframe class="embed-responsive-item e2e-iframe-untrusted-src" [src]="safeUrl()"></iframe>-->
+              <video controls preload="auto" poster="">
+                <source src="{{previewUrl}}#t=4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+          </div>
+          <div class="card-body" *ngIf="trackCensoredName">
+            <h5 class="card-title"><strong>{{trackCensoredName}}</strong></h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngIf="longDescription"><strong>Overview:</strong> {{longDescription}}</li>
+            <a href="{{trackViewUrl}}" target="_blank" *ngIf="trackRentalPrice">
+              <li class="list-group-item" *ngIf="trackRentalPrice"><strong>RentPrice:</strong> ${{trackRentalPrice}}</li>
+            </a>
+            <a href="{{trackViewUrl}}" target="_blank" *ngIf="trackPrice">
+              <li class="list-group-item" *ngIf="trackPrice"><strong>Price:</strong> ${{trackPrice}}</li>
+            </a>
+            <li class="list-group-item" *ngIf="primaryGenreName"><strong>Genre</strong> {{primaryGenreName}}</li>
+            <li class="list-group-item" *ngIf="country"><strong>Country:</strong> {{country}}</li>
+          </ul>
+          <div class="card-body" *ngIf="trackViewUrl">
+            <a href="{{trackViewUrl}}" class="card-link" target="_blank">Go to store</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
